@@ -4,21 +4,10 @@
 ;; Charles' boots emac file (starting from scratch, thus boots(strap))
 
 ;;; Code:
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   '("2dc03dfb67fbcb7d9c487522c29b7582da20766c9998aaad5e5b63b5c27eec3f" default))
- '(package-selected-packages
-   '(key-chord npm-mode xref-js2 js2-refactor skewer-mode yaml-mode treemacs-magit treemacs zenburn-theme which-key easy-hugo org markdown-mode ivy-hydra hydra ivy-avy ivy magit cider avy exec-path-from-shell)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+
+(setq-default custom-file (expand-file-name ".custom.el" user-emacs-directory))
+(when (file-exists-p custom-file) ; Don’t forget to load it, we still need it
+  (load custom-file))
 
 ;; Initialize package and related archives
 (require 'package)
@@ -101,6 +90,9 @@
 (put 'scroll-left 'disabled nil)        ; Enable `scroll-left'
 (put 'upcase-region 'disabled nil)      ; Enable `upcase-region'
 (set-default-coding-systems 'utf-8)     ; Default to utf-8 encoding
+
+(setq backup-directory-alist `(("." . ,(expand-file-name ".tmp/backups/"
+                                                         user-emacs-directory))))
 
 ;; from technomancy's better defaults: https://git.sr.ht/~technomancy/better-defaults
 (unless (or (fboundp 'helm-mode) (fboundp 'ivy-mode))
